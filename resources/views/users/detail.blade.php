@@ -23,41 +23,6 @@
     </div>
 </div>
 
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card border-0 shadow rounded">
-                <div class="card-body text-center">
-                    <h2>Kendaraan yang didaftarkan oleh {{ $user->name }}</h2>
-                    <table class="table table-bordered mx-auto">
-                        <thead>
-                            <tr>
-                                <th scope="col">No</th>
-                                <th scope="col">Nomor Plat Kendaraan</th>
-                                <th scope="col">Brand Kendaraan</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @php $no = 1; @endphp
-                            @forelse ($listvehicle as $data)
-                                <tr>
-                                    <td>{{ $no++ }}</td>
-                                    <td>{{ $data->vehicle_number }}</td>
-                                    <td>{{ $data->vehicle_brand }}</td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="4" class="text-center">Tidak ada kendaraan yang didaftarkan.</td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
