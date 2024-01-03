@@ -43,7 +43,6 @@ class ParkingActivitieController extends Controller
   
     public function store(Request $request)
     {
-        
         $validatedData = $request->validate([
             'user_id' => 'required',
             'slot_id' => [
@@ -65,7 +64,6 @@ class ParkingActivitieController extends Controller
                 'required',
                 function ($attribute, $value, $fail) use ($request) {
                     if ($value === 'Masuk') {
-                     
                         $existingEntry = ParkingActivitie::where('user_id', $request->user_id)
                             ->where('status', 'Masuk')
                             ->first();
@@ -74,7 +72,6 @@ class ParkingActivitieController extends Controller
                             $fail("You can't create a new entry while you're already inside.");
                         }
                     } elseif ($value === 'Keluar') {
-                        
                         $lastEntry = ParkingActivitie::where('user_id', $request->user_id)
                             ->orderByDesc('created_at')
                             ->first();
@@ -89,23 +86,23 @@ class ParkingActivitieController extends Controller
             'user_id.required' => 'The user_id field is required.',
             'slot_id.required' => 'The slot_id field is required.',
             'slot_id.*' => 'Custom error message for slot_id validation.',
-           
+            'in_datetime.date_format' => 'The in_datetime field must be in the format dd/mm/yyyy HH.mm.',
         ]);
     
-        
         $slot = ParkingSlot::find($request->slot_id);
         if ($slot) {
             $slot->status = 'Berisi';
             $slot->save();
         }
     
-        
+        $validatedData['status'] = 'Masuk';
+    
+    
         $activity = ParkingActivitie::create($validatedData);
     
-        
         return response()->json(['message' => 'Parking activity created successfully', 'activity' => $activity], 201);
     }
-
+    
     public function create(ParkingActivitie $varparkingActivity)
     {
         $title = "Parking Activities";
