@@ -60,6 +60,7 @@ class ParkingActivitieController extends Controller
             'vehicle_number' => 'required',
             'vehicle_brand' => 'required',
             'in_datetime' => 'required',
+            'out_datetime' => 'nullable',
             'status' => [
                 'required',
                 function ($attribute, $value, $fail) use ($request) {
